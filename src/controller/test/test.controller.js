@@ -1,4 +1,5 @@
-const crypto = require('util/crypto')
+import crypto from 'util/crypto'
+import TestService from '../../service/filter/test/test.service'
 
 exports.init = function (app, router) {
   logger.debug(`test router bind start`)
@@ -8,20 +9,20 @@ exports.init = function (app, router) {
   router.get('/test', test)
 }
 
-const encrypt = (req, res, next) => {
+const encrypt = (req, res) => {
   let afterCrypt = crypto.encrypt(req.params.val)
   res.json(afterCrypt)
 }
 
-const decrypt = (req, res, next) => {
+const decrypt = (req, res) => {
   let afterCrypt = crypto.decrypt(req.params.val)
   res.json(afterCrypt)
 }
 
-const alive = (req, res, next) => {
+const alive = (req, res) => {
   res.json('alive')
 }
 
-const test = (req, res, next) => {
-  res.json('test..')
+const test = (req, res) => {
+  res.json(TestService.getTest())
 }

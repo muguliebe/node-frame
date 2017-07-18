@@ -1,10 +1,8 @@
-const crypto = require('util/crypto')
-const security = require('config/security.json')
+import * as crypto from 'util/crypto'
+import security from 'config/security.json'
 
-module.exports = function () {
-  return new Config()
-
-  function Config () {
+export default class Config {
+  constructor () {
     // init
     process.env.NODE_ENV = (process.env.NODE_ENV && (process.env.NODE_ENV).trim().toLowerCase() === 'production')
       ? 'production'

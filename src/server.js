@@ -1,23 +1,19 @@
-const express = require('express')
+import * as advice from './service/filter/advice'
+import path from 'path'
+import express from 'express'
+import readReadSync from 'recursive-readdir-sync'
+import bodyParser from 'body-parser' // parses information from POST
+import cookieParser from 'cookie-parser'
+import responseTime from 'response-time' // set header X-Response-Time
+import session from 'express-session'
+import connectMongo from 'connect-mongo'
+import { Server } from 'http'
 const router = express.Router()
 const app = express()
-const path = require('path')
-const fs = require('fs')
-const readReadSync = require('recursive-readdir-sync')
-const advice = require('./service/filter/advice')
-const bodyParser = require('body-parser') // parses information from POST
-const cookieParser = require('cookie-parser')
-const responseTime = require('response-time') // set header X-Response-Time
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
-const passport = require('passport')
-const flash = require('connect-flash')
-// const morgan       = require('morgan')
-const cors = require('express-cors')
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
+const server = Server(app)
+const MongoStore = connectMongo(session)
 
-export default class Server {
+export default class AppServer {
   constructor () {
     logger.warn(`server prepare start =====================================`)
 
@@ -71,7 +67,7 @@ export default class Server {
     })
 
     try {
-      var controllers = path.join(__dirname, './controller/')
+      const controllers = path.join(__dirname, './controller/')
       logger.info(`controller(routes) bind start at ${controllers}`)
       readReadSync(controllers)
         .filter(file => {
@@ -90,7 +86,7 @@ export default class Server {
     }
 
     // logging
-    logger.warn(`server prepare start =====================================\n`)
+    logger.warn(`server prepare start =====================================`)
     logger.warn(`current environment NODE_ENV  : ${process.env.NODE_ENV}`)
     logger.warn(`current environment Mongo  URI: ${config.mongo.ip}`)
     logger.warn(`server prepare ended =====================================\n`)

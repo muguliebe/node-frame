@@ -1,7 +1,7 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema
+import mongoose from 'mongoose'
+const Schema = mongoose.Schema
 
-var schema = new Schema({
+const schema = new Schema({
   day: String,
   time: String,
   url: String,
@@ -15,5 +15,5 @@ var schema = new Schema({
   createdAt: {type: Date, expires: 60 * 5, default: Date.now} // expires 5 min
 })
 
-var Transaction = mongoose.model('Transaction', schema, 'transaction')
-module.exports = Transaction
+const Transaction = mongoose.model('Transaction', schema, 'transaction')
+export default Transaction

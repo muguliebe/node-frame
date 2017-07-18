@@ -1,16 +1,23 @@
-// ------------------------------------------------------------------------------
-require('source-map-support').install()
+import winston from 'winston'
+import { hostname } from 'os'
+import 'date-utils'
+import lodash from 'lodash'
+import 'source-map-support'
 import 'app-module-path/register'
+import bluebird from 'bluebird'
+import mongoose from 'mongoose'
 import Server from './server'
+import Config from './config/config'
 
-// ------------------------------------------------------------------------------
-// global libarary setting
-global._ = require('lodash')
-require('date-utils')
-global.hostname = require('os').hostname()
+// -----------------------------------------------------------------------------
+// global library setting
+// -----------------------------------------------------------------------------
+global._ = lodash
+global.hostname = hostname()
 
-// logger setting
-var winston = require('winston')
+// -----------------------------------------------------------------------------
+// set Logger
+// -----------------------------------------------------------------------------
 let logLevel = (process.env.NODE_ENV || 'development') === 'development' ? 'debug' : 'warn'
 global.logger = new (winston.Logger)({
   transports: [
@@ -21,21 +28,21 @@ global.logger = new (winston.Logger)({
   ]
 })
 
-// ------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // load config
+// -----------------------------------------------------------------------------
 logger.warn(`load config start =====================================`)
-var Config = require('./config/config')
-var config = global.config = new Config()
+const config = global.config = new Config()
 logger.warn(`load config ended =====================================\n`)
 
-// ------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // db
-var mongoose = require('mongoose')
+// -----------------------------------------------------------------------------
 global.mongoose = mongoose.connect(config.mongo.url)
-mongoose.Promise = require('bluebird')
+mongoose.Promise = bluebird
 
-// ------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 // start
+// -----------------------------------------------------------------------------
 logger.warn(`>>> Server Start at ${__dirname} <<<`)
-
 new Server().start()
