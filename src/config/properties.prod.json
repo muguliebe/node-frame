@@ -1,0 +1,8 @@
+{
+  "mongo": {
+    "user": "{insert user}",
+    "password": "{insert password}",
+    "database": "{insert database name}",
+    "ip": "{insert ip}"
+  }
+}

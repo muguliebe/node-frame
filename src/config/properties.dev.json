@@ -1,0 +1,9 @@
+{
+  "mongo": {
+    "user": "test",
+    "password": "test",
+    "database": "test1",
+    "ip": "ds147842.mlab.com",
+    "port": 47842
+  }
+}
