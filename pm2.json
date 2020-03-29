@@ -1,0 +1,10 @@
+{
+    "apps": [
+        {
+            "name": "node-frame",
+            "script": "npm",
+            "interpreter": "node@11.15.0",
+            "args" : "start"
+        }
+    ]
+}
