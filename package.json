@@ -46,7 +46,7 @@
         "gulp-nodemon": "^2.2.1",
         "http": "0.0.0",
         "ip-address": "^5.8.6",
-        "lodash": "^4.17.4",
+        "lodash": "^4.17.19",
         "mongo": "^0.1.0",
         "mongoose": "^4.8.1",
         "passport": "^0.3.2",
