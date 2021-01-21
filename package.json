@@ -57,7 +57,7 @@
         "passport-twitter": "^1.0.4",
         "recursive-readdir-sync": "^1.0.6",
         "response-time": "^2.3.2",
-        "socket.io": "^1.7.2",
+        "socket.io": "^2.4.0",
         "winston": "^2.3.1",
         "winston-daily-rotate-file": "^1.4.4"
     }
